@@ -44,7 +44,5 @@ def reverse_complement(sequence):
 
     return reverse_complement
 
-print(reverse_complement(sequence))
-
     
 
