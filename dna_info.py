@@ -30,18 +30,21 @@ def reverse_complement(sequence):
         "A": "T",
         "T": "A",
         "C": "G",
-        "G": "C"}
+        "G": "C",
+        "N" : "N"}
 
     reversed_seq = reversed(sequence)
     base_pairs = []
 
     for nucleotide in reversed_seq:
-        base_pairs = complement[nucleotide]
-        base_pairs.append(base_pairs)
+        complementary_base= complement[nucleotide]
+        base_pairs.append(complementary_base)
 
     reverse_complement = "".join(base_pairs)
-    
+
     return reverse_complement
+
+print(reverse_complement(sequence))
 
     
 
