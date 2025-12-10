@@ -1,19 +1,20 @@
 
 sequence = "ATGCGTAAACGTTAAGA"
+#function counts the number of A, T, G, C nucleotides
 def count_nucleotides(sequence):
-    A = sequence.count("A")
-    T = sequence.count("T")
-    C = sequence.count("C")
-    G = sequence.count("G")
+    a = sequence.count("A")
+    t = sequence.count("T")
+    c = sequence.count("C")
+    g = sequence.count("G")
     
-    return A, T, C, G
+    return a, t, c, g
 
+#gc content is calculated taking into the account ambiguous bases like "N"
+def gc_content(a, t, c, g):
+    total_nucleotides = a + t + c + g
+    gc_content = ((c + g )/ total_nucleotides) * 100
 
-
-print(count_nucleotides(sequence))
-
-def gc_content(sequence):
-    ...
+    return gc_content
 
 def transcribe(sequence):
     ...
