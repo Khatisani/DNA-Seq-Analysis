@@ -64,7 +64,7 @@ def main():
 
         result = {
             "id": id,
-            "length": len(sequences),
+            "length": len(sequence),
             "A": a,
             "T": t,
             "C": c,
