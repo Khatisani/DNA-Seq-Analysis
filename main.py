@@ -58,10 +58,20 @@ def main():
 
         if motif:
             positions = motif_search(sequence, motif)
-            positions = ";".join(map(str,positions)) if positions else "None"
+            if positions:
+                positions = ";".join(map(str,positions))
+                pos = positions.split(";")
+                number = len(pos)
+            else: 
+                positions = "None"
+                number = 0
         else:
             positions = "N/A"
+            number = 0
 
+
+
+        
         result = {
             "id": id,
             "length": len(sequence),
@@ -72,8 +82,10 @@ def main():
             "GC_content": gc,
             "RNA_transcript": mrna,
             "Reverse_complement": rev_comp,
+            "Motif_Count": number,
             "Motif_positions": positions
         }
+        
 
         output.append(result)
 
