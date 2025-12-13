@@ -69,9 +69,6 @@ def main():
             positions = "N/A"
             number = 0
 
-
-
-        
         result = {
             "id": id,
             "length": len(sequence),
