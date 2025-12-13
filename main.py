@@ -51,7 +51,8 @@ def main():
         motif = None
 
     for id, sequence in sequences.items():
-        a, t, c, g = count_nucleotides(sequence)
+        
+        percentage_a, a, percentage_t, t, percentage_c, c, percentage_g, g = count_nucleotides(sequence)
         gc = gc_content(a, t, c, g)
         mrna = transcribe(sequence)
         rev_comp = reverse_complement(sequence)
@@ -59,7 +60,7 @@ def main():
         if motif:
             positions = motif_search(sequence, motif)
             if positions:
-                positions = ";".join(map(str,positions))
+                positions = " ".join(map(str,positions))
                 pos = positions.split(";")
                 number = len(pos)
             else: 
@@ -72,11 +73,11 @@ def main():
         result = {
             "id": id,
             "length": len(sequence),
-            "A": a,
-            "T": t,
-            "C": c,
-            "G": g,
-            "GC_content": gc,
+            "A%": percentage_a,
+            "T%": percentage_t,
+            "C%": percentage_c,
+            "G%": percentage_g,
+            "GC_content(%)": gc,
             "RNA_transcript": mrna,
             "Reverse_complement": rev_comp,
             "Motif_Count": number,
