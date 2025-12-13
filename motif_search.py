@@ -4,11 +4,15 @@ def motif_search(sequence,  motif):
     sequence = sequence.upper()
     motif = motif.upper()
     
-    motif_positions = []
+    positions = []
     motif_length = len(motif)
-    
-    for i in range(len(sequence) - motif_length + 1):
-        if sequence[i:i+motif_length] == motif:
-            motif_positions.append(i + 1)
-    
-    return motif_positions
+        
+    i = 0
+    while True:
+        i = sequence.find(motif, i)
+        if i == -1:
+            break
+        positions.append(i + 1)
+        i += 1 
+        
+    return positions
