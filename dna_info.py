@@ -1,4 +1,3 @@
-from main import parse_fasta
 
 #counts the number of A, T, G, C nucleotides
 def count_nucleotides(sequence):
@@ -12,9 +11,9 @@ def count_nucleotides(sequence):
 #gc content is calculated taking into the account ambiguous bases like "N"
 def gc_content(a, t, c, g):
     total_nucleotides = a + t + c + g
-    gc_content = round(((c + g )/ total_nucleotides) * 100, 2)
+    gc= round(((c + g )/ total_nucleotides) * 100, 2)
 
-    return gc_content
+    return gc
 
 #generates the RNA transcript of the DNA sequence
 def transcribe(sequence):
@@ -38,9 +37,9 @@ def reverse_complement(sequence):
         complementary_base= complement[nucleotide]
         base_pairs.append(complementary_base)
 
-    reverse_complement = "".join(base_pairs)
+    rev_comp = "".join(base_pairs)
 
-    return reverse_complement
+    return rev_comp
 
 #finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):

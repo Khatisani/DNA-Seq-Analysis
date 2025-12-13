@@ -27,7 +27,7 @@ def parse_fasta(input_file):
     return sequences
 
 
-def write_to_csv():
+def write_to_csv(output, output_file):
     if not output:
         print("No output to write.")
         return
@@ -39,11 +39,17 @@ def write_to_csv():
         writer.writeheader()
         writer.writerows(output)
 
+
 def main():
     motif = None
     input_file = "example.fasta"
     sequences = parse_fasta("example.fasta")
-    output = {}
+    output = []
+    motif = input("Enter motif to search (press Enter to skip): ").strip()
+
+    if motif == "":
+        motif = None
+
     for id, sequence in sequences.items():
         a, t, c, g = count_nucleotides(sequence)
         gc = gc_content(a, t, c, g)
@@ -51,10 +57,10 @@ def main():
         rev_comp = reverse_complement(sequence)
 
         if motif:
-            motif_positions = motif_search(sequence, motif)
-            motif_positions = ";".join(map(str, motif_positions)) if motif_positions else "None"
+            positions = motif_search(sequence, motif)
+            positions = ";".join(map(str,positions)) if positions else "None"
         else:
-            motif_positions = "N/A"
+            positions = "N/A"
 
         result = {
             "id": id,
@@ -63,9 +69,9 @@ def main():
             "T": t,
             "C": c,
             "G": g,
-            "GC_content": gc_content,
-            "RNA_transcript": mRNA,
-            "Reverse_complement": reverse_complement,
+            "GC_content": gc,
+            "RNA_transcript": mrna,
+            "Reverse_complement": rev_comp,
             "Motif_positions": positions
         }
 
