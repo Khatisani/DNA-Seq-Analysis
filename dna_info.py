@@ -1,6 +1,4 @@
-
-sequence = "ATGCGTAAACGTTNAAGA"
-sequence= sequence.strip().upper()
+from main import parse_fasta
 
 #counts the number of A, T, G, C nucleotides
 def count_nucleotides(sequence):
