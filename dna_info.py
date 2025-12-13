@@ -5,13 +5,15 @@ def count_nucleotides(sequence):
     t = sequence.count("T")
     c = sequence.count("C")
     g = sequence.count("G")
+    n = sequence.count("N")
 
     percentage_a = round((a / len(sequence)) * 100, 2)
     percentage_t = round((t / len(sequence)) * 100, 2)
-    percentage_c = round((g / len(sequence)) * 100, 2)
+    percentage_c = round((c / len(sequence)) * 100, 2)
     percentage_g = round((g / len(sequence)) * 100, 2)
+    percentage_n = round((n / len(sequence)) * 100, 2)
 
-    return a, t, c, g, percentage_a, percentage_t, percentage_c, percentage_g
+    return a, t, c, g, percentage_a, percentage_t, percentage_c, percentage_g, percentage_n
 
 
 #gc content is calculated taking into the account ambiguous bases like "N"

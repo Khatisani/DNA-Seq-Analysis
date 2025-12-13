@@ -51,8 +51,7 @@ def main():
         motif = None
 
     for id, sequence in sequences.items():
-        
-        percentage_a, a, percentage_t, t, percentage_c, c, percentage_g, g = count_nucleotides(sequence)
+        a, t, c, g, percentage_a, percentage_t, percentage_c, percentage_g, percentage_n = count_nucleotides(sequence)
         gc = gc_content(a, t, c, g)
         mrna = transcribe(sequence)
         rev_comp = reverse_complement(sequence)
@@ -77,6 +76,7 @@ def main():
             "T%": percentage_t,
             "C%": percentage_c,
             "G%": percentage_g,
+            "N%" : percentage_n,
             "GC_content(%)": gc,
             "RNA_transcript": mrna,
             "Reverse_complement": rev_comp,
