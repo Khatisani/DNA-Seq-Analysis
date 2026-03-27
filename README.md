@@ -13,3 +13,8 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 - Export results to **CSV file** for easy viewing
 
 ---
+
+## **Requirements & Installation **
+
+- Install Dependencies 
+`pip install biopython` 
