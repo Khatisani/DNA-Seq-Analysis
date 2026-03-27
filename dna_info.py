@@ -20,9 +20,7 @@ def gc_content(a, t, c, g):
 
 #generates the RNA transcript of the DNA sequence
 def transcribe(sequence):
-    mRNA = sequence.replace("T", "U")
-
-    return mRNA
+    return str(Seq(sequence).transcribe())
 
 #generates the reverse complement of the sequence
 def reverse_complement(sequence):
