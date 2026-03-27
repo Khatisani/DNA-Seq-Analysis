@@ -29,16 +29,19 @@ def parse_fasta(input_file):
 
 
 def write_to_csv(output, output_file):
+    output_file = "results.csv"
+    
     if not output:
         print("No output to write.")
         return
 
-    headers = output[0].keys()
+    keys = output[0].keys()
 
     with open(output_file, "w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=headers)
+        writer = csv.DictWriter(file, fieldnames=keys)
         writer.writeheader()
         writer.writerows(output)
+    print(f"Success! Analyzed {len(output)} sequences. See {output_file}.")
 
 
 def main():
