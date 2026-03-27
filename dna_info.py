@@ -1,20 +1,15 @@
+from Bio.Seq import Seq
+
 
 #counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
-    a = sequence.count("A") 
-    t = sequence.count("T")
-    c = sequence.count("C")
-    g = sequence.count("G")
-    n = sequence.count("N")
+    seq = Seq(sequence)
+    length = len(seq)
 
-    percentage_a = round((a / len(sequence)) * 100, 2)
-    percentage_t = round((t / len(sequence)) * 100, 2)
-    percentage_c = round((c / len(sequence)) * 100, 2)
-    percentage_g = round((g / len(sequence)) * 100, 2)
-    percentage_n = round((n / len(sequence)) * 100, 2)
+    nucleotide_counts = {base: seq.count(base) for base in "ATGN"}
+    nucleotide_percentage = {base: round((seq.count(base) / length) * 100, 2) for base in "ATGCN"}
 
-    return a, t, c, g, percentage_a, percentage_t, percentage_c, percentage_g, percentage_n
-
+    return nucleotide_counts, nucleotide_percentage
 
 #gc content is calculated taking into the account ambiguous bases like "N"
 def gc_content(a, t, c, g):
