@@ -2,24 +2,9 @@ import csv
 from Bio import SeqIO
 from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search
 
-def write_to_csv(output, output_file):
-    output_file = "results.csv"
-
-    if not output:
-        print("No output to write.")
-        return
-
-    keys = output[0].keys()
-
-    with open(output_file, "w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=keys)
-        writer.writeheader()
-        writer.writerows(output)
-    print(f"Success! Analyzed {len(output)} sequences. See {output_file}.")
-
-
 def main():
     input_file = "example.fasta"
+    output_file = "results.csv"
     output = []
 
     try:
@@ -30,8 +15,8 @@ def main():
     
     motif = input("Enter motif to search (press Enter to skip): ").strip()
     
-    for dna_seq in dna_seqs:
-        dna_seq_str = str(dna_seq.sequence)
+    for record in dna_seqs:
+        dna_seq_str = str(record.seq)
 
         nucleotide_counts, nucleotide_percentages = count_nucleotides(dna_seq_str) 
         gc = gc_content(dna_seq_str)
@@ -48,7 +33,7 @@ def main():
             motif_positions_str = "None"
 
         row = {
-            "id": dna_seq.id,
+            "id": record.id,
             "length": len(dna_seq_str),
             "GC%": gc,
             "A%": nucleotide_percentages["A"],
@@ -63,6 +48,19 @@ def main():
         }
 
         output.append(row)
+
+    if not output:
+        print("No output to write.")
+        return
+
+    keys = output[0].keys()
+
+    with open(output_file, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=keys)
+        writer.writeheader()
+        writer.writerows(output)
+    print(f"Success! Analyzed {len(output)} sequences. See {output_file}.")
+
 
 if __name__ == "__main__":
     main()
