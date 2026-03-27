@@ -2,35 +2,9 @@ import csv
 from Bio import SeqIO
 from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search
 
-def parse_fasta(input_file):
-
-    sequences = {}
-    id = None
-    lines = []
-
-    with open(input_file, "r") as file:
-        for line in file:
-            line = line.strip()  
-            if not line:
-                    continue 
-            if line.startswith(">"):
-                if id:
-                    sequences[id] = "".join(lines).upper()
-                       
-                id = line[1:].split()[0]
-                lines = []
-            else:
-                lines.append(line)
-  
-        if id:
-            sequences[id] = "".join(lines).upper()
-
-    return sequences
-
-
 def write_to_csv(output, output_file):
     output_file = "results.csv"
-    
+
     if not output:
         print("No output to write.")
         return
