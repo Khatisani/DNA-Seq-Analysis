@@ -18,3 +18,24 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 
 - Install Dependencies 
 `pip install biopython` 
+
+## **Next Steps **
+✔ Manual data handling
+✔ Biopython Integration 
+
+Molecular Weight 
+Sequence Entropy
+GC skew
+
+Error Handling and Validation
+Pandas and Matplotlib
+BLAST Integration
+Translation (start stop codon, ORF)
+
+Argument Parsing 
+File upload (Tkinter)
+Web App (Streamlit)
+
+
+
+
