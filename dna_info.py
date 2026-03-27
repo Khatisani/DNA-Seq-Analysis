@@ -26,23 +26,7 @@ def transcribe(sequence):
 
 #generates the reverse complement of the sequence
 def reverse_complement(sequence):
-    complement = {
-        "A": "T",
-        "T": "A",
-        "C": "G",
-        "G": "C",
-        "N" : "N"}
-
-    reversed_seq = reversed(sequence)
-    base_pairs = []
-
-    for nucleotide in reversed_seq:
-        complementary_base= complement[nucleotide]
-        base_pairs.append(complementary_base)
-
-    rev_comp = "".join(base_pairs)
-
-    return rev_comp
+    return str(Seq(sequence).reverse_complement())
 
 #finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):
