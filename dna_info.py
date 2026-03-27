@@ -1,5 +1,5 @@
 from Bio.Seq import Seq
-
+from Bio.SeqUtils import gc_fraction 
 
 #counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
@@ -12,11 +12,9 @@ def count_nucleotides(sequence):
     return nucleotide_counts, nucleotide_percentage
 
 #gc content is calculated taking into the account ambiguous bases like "N"
-def gc_content(a, t, c, g):
-    total_nucleotides = a + t + c + g
-    gc = round(((c + g )/ total_nucleotides) * 100, 2)
-
-    return gc
+def gc_content(sequence):
+    gc_percentage = gc_fraction(sequence) *100
+    return round(gc_percentage, 2)
 
 #generates the RNA transcript of the DNA sequence
 def transcribe(sequence):
