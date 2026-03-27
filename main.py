@@ -1,4 +1,5 @@
 import csv
+from Bio import SeqIO
 from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search
 
 def parse_fasta(input_file):
@@ -41,54 +42,50 @@ def write_to_csv(output, output_file):
 
 
 def main():
-    motif = None
     input_file = "example.fasta"
-    sequences = parse_fasta("example.fasta")
     output = []
+
+    try:
+        dna_seqs = list(SeqIO.parse(input_file, "fasta"))
+    except FileNotFoundError:
+        print("Error: {input_file} not found")
+        return
+    
     motif = input("Enter motif to search (press Enter to skip): ").strip()
+    
+    for dna_seq in dna_seqs:
+        dna_seq_str = str(dna_seq.sequence)
 
-    if motif == "":
-        motif = None
-
-    for id, sequence in sequences.items():
-        a, t, c, g, percentage_a, percentage_t, percentage_c, percentage_g, percentage_n = count_nucleotides(sequence)
-        gc = gc_content(a, t, c, g)
-        mrna = transcribe(sequence)
-        rev_comp = reverse_complement(sequence)
+        nucleotide_counts, nucleotide_percentages = count_nucleotides(dna_seq_str) 
+        gc = gc_content(dna_seq_str)
+        mRNA = transcribe(dna_seq_str)
+        reverse_comp = reverse_complement(dna_seq_str)
 
         if motif:
-            positions = motif_search(sequence, motif)
-            if positions:
-                positions = " ".join(map(str,positions))
-                pos = positions.split(";")
-                number = len(pos)
-            else: 
-                positions = "None"
-                number = 0
+            motif_positions = motif_search(dna_seq_str, motif)
+            motif_counts = len(motif_positions)
+            motif_positions_str = " ".join(map(str, motif_positions)) if motif_positions else "None"
+
         else:
-            positions = "N/A"
-            number = 0
+            motif_counts = 0
+            motif_positions_str = "None"
 
-        result = {
-            "id": id,
-            "length": len(sequence),
-            "A%": percentage_a,
-            "T%": percentage_t,
-            "C%": percentage_c,
-            "G%": percentage_g,
-            "N%" : percentage_n,
-            "GC_content(%)": gc,
-            "RNA_transcript": mrna,
-            "Reverse_complement": rev_comp,
-            "Motif_Count": number,
-            "Motif_positions": positions
+        row = {
+            "id": dna_seq.id,
+            "length": len(dna_seq_str),
+            "GC%": gc,
+            "A%": nucleotide_percentages["A"],
+            "T%": nucleotide_percentages["T"],
+            "C%": nucleotide_percentages["C"],
+            "G%": nucleotide_percentages["G"],
+            "N%": nucleotide_percentages["N"],
+            "RNA": mRNA,
+            "Rev_Comp": reverse_comp,
+            "Motif_Count": motif_counts,
+            "Motif_Positions": motif_positions_str
         }
-        
 
-        output.append(result)
-
-    write_to_csv(output, "results.csv")
-
+        output.append(row)
 
 if __name__ == "__main__":
     main()
