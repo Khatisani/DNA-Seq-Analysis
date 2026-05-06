@@ -2,6 +2,23 @@ import math
 from Bio.Seq import Seq
 from Bio.SeqUtils import gc_fraction, nt_search, molecular_weight
 
+#Validates the sequence
+def validate_sequence(sequence):
+    s = sequence.upper().strip()
+
+    if len(s) == 0:
+        return False, "Sequence is empty"
+    
+    valid_bases = set("ATGCN")
+    sequence_set = set(s)
+
+    invalid = sequence_set - valid_bases
+
+    if invalid:
+        return False, f"Contains invalid characters: {', '.join(invalid)}"
+    return True, "Valid sequence."
+
+
 #counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
     seq = Seq(sequence)
