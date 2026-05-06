@@ -25,7 +25,7 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 
 - ✔ Molecular Weight 
 - ✔ Sequence Entropy
-- GC skew
+- ✔ GC skew
 
 - Error Handling and Validation
 - Pandas and Matplotlib
