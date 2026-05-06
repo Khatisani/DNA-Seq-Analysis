@@ -27,7 +27,7 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 - ✔ Sequence Entropy
 - ✔ GC skew
 
-- Error Handling and Validation
+- ✔ Error Handling and Validation
 - Pandas and Matplotlib
 - BLAST Integration
 - Translation (start stop codon, ORF)
