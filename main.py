@@ -17,7 +17,7 @@ def main():
     motif = input("Enter motif to search (press Enter to skip): ").strip()
     
     for record in dna_seqs:
-        dna_seq_str = str(record.seq)
+        dna_seq_str = str(record.sequence)
 
         nucleotide_counts, nucleotide_percentages = count_nucleotides(dna_seq_str) 
         gc = gc_content(dna_seq_str)
