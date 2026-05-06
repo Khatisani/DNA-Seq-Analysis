@@ -42,7 +42,7 @@ def main():
             "C%": nucleotide_percentages["C"],
             "G%": nucleotide_percentages["G"],
             "N%": nucleotide_percentages["N"],
-            "Mol Weight": mol_weight,
+            "Mol Weight (Da)": mol_weight,
             "RNA": mRNA,
             "Rev_Comp": reverse_comp,
             "Motif_Count": motif_counts,
