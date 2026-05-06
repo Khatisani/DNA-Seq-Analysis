@@ -59,3 +59,18 @@ def cal_entropy (sequence):
             entropy -= probability * math.log2(probability)
 
     return round(entropy, 3)
+
+#Calculates the gc skew of a sequence. 
+def cal_gc_skew (sequence):
+
+    s = sequence.upper()
+    g_count = s.count("G")
+    c_count = s.count("C")
+
+    total_gc = g_count + c_count
+
+    if total_gc == 0:
+        return 0.0
+    
+    skew = (g_count - c_count) / total_gc
+    return round(skew, 4)
