@@ -1,6 +1,6 @@
 import csv
 from Bio import SeqIO
-from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence
+from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence, validate_motif
 
 
 def main():
@@ -15,7 +15,14 @@ def main():
         return
     
     motif = input("Enter motif to search (press Enter to skip): ").strip()
-    
+    motif_valid = True
+    if motif:
+        is_valid, error_message = validate_motif(motif)
+        if not is_valid:
+            print(f"Skipping motif search '{motif}': {error_message}")
+            motif_valid = False
+            motif = " "
+
     for record in dna_seqs:
         dna_seq_str = str(record.sequence)
 
