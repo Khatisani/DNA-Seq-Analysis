@@ -36,7 +36,7 @@ def motif_search(sequence,  motif):
 
 
 #Calculates the molecular weight of a DNA sequence
-def calc_molecular_weight(sequence, type = "DNA"):
+def calc_molecular_weight(sequence, seq_type = "DNA"):
     seq = Seq(sequence.upper())
-    weight = molecular_weight(seq, type = type)
+    weight = molecular_weight(seq, seq_type = seq_type)
     return round(weight, 2)
