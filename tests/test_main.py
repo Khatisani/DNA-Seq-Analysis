@@ -28,3 +28,29 @@ def test_valid_motif():
 def test_invalid_motif():
     is_valid, msg = validate_motif("X!")
     assert is_valid == False
+
+def test_count_nucleotides():
+    """Test that nucleotide counting works accurately."""
+    seq = "ATCGATCG"
+    counts, percentages = count_nucleotides(seq)
+    
+    assert counts["A"] == 2
+    assert counts["T"] == 2
+    assert counts["C"] == 2
+    assert counts["G"] == 2
+    assert counts["N"] == 0
+    
+    assert percentages["A"] == 25.0
+    assert percentages["T"] == 25.0
+    assert percentages["C"] == 25.0
+    assert percentages["G"] == 25.0
+
+def test_gc_content():
+    seq = "ATCG"
+    gc = gc_content(seq)
+    assert gc == 50.0
+
+def test_gc_content_case_insensitivity():
+    seq = "atcg"
+    gc = gc_content(seq)
+    assert gc == 50.0

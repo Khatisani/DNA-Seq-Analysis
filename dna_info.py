@@ -21,10 +21,14 @@ def validate_sequence(sequence):
 
 #counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
-    seq = Seq(sequence)
+    seq = Seq(sequence.upper().strip())
     length = len(seq)
 
-    nucleotide_counts = {base: seq.count(base) for base in "ATGN"}
+    if length == 0:
+        empty_dict = {"A": 0, "T": 0, "G": 0, "C": 0, "N": 0}
+        return empty_dict, empty_dict
+    
+    nucleotide_counts = {base: seq.count(base) for base in "ATGCN"}
     nucleotide_percentage = {base: round((seq.count(base) / length) * 100, 2) for base in "ATGCN"}
 
     return nucleotide_counts, nucleotide_percentage
