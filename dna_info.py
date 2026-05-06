@@ -14,23 +14,23 @@ def count_nucleotides(sequence):
 
 #gc content is calculated taking into the account ambiguous bases like "N"
 def gc_content(sequence):
-    gc_percentage = gc_fraction(sequence) *100
+    gc_percentage = gc_fraction(sequence.upper()) *100
     return round(gc_percentage, 2)
 
 
 #generates the RNA transcript of the DNA sequence
 def transcribe(sequence):
-    return str(Seq(sequence).transcribe())
+    return str(Seq(sequence.upper()).transcribe())
 
 
 #generates the reverse complement of the sequence
 def reverse_complement(sequence):
-    return str(Seq(sequence).reverse_complement())
+    return str(Seq(sequence.upper()).reverse_complement())
 
 
 #finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):
-    output = nt_search(str(sequence). upper(), motif.upper())
+    output = nt_search(str(sequence.upper(), motif.upper())
     motif_positions = [position + 1 for position in output[1:]]
     return motif_positions
 
