@@ -75,7 +75,11 @@ def validate_motif (motif):
 
 #Calculates the molecular weight of a DNA sequence
 def calc_molecular_weight(sequence, seq_type = "DNA"):
-    seq = Seq(sequence.upper())
+    seq = Seq(sequence).upper().strip()
+
+    if not seq:
+        return 0.0 
+    
     clean_seq = seq.replace("N", "A")
     weight = molecular_weight(clean_seq, seq_type = seq_type)
     return round(weight, 2)

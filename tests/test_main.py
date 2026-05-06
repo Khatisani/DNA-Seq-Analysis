@@ -1,6 +1,7 @@
 import pytest
 import sys
 import os
+import math 
 
 from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence, validate_motif
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -84,3 +85,26 @@ def test_reverse_complement_empty():
     dna = ""
     rev_comp = reverse_complement(dna)
     assert rev_comp == ""
+
+def test_molecular_weight_standard():
+    dna = "AAAA"
+    mw = calc_molecular_weight(dna)
+    assert mw > 0
+
+def test_molecular_weight_empty():
+    mw = calc_molecular_weight("")
+    assert mw == 0.0
+
+def test_entropy_uniform():
+    dna = "ATCG"
+    entropy = cal_entropy(dna)
+    assert math.isclose(entropy, 2.0, rel_tol=1e-9)
+
+def test_entropy_single_base():
+    dna = "AAAA"
+    entropy = cal_entropy(dna)
+    assert math.isclose(entropy, 0.0, rel_tol=1e-9)
+
+def test_entropy_empty():
+    entropy = cal_entropy("")
+    assert entropy == 0.0
