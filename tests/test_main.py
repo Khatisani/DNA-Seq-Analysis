@@ -108,3 +108,43 @@ def test_entropy_single_base():
 def test_entropy_empty():
     entropy = cal_entropy("")
     assert entropy == 0.0
+
+def test_motif_search_standard():
+    dna = "ATCGATCG"
+    motif = "ATC"
+    positions, count = motif_search(dna, motif)
+    
+    assert count == 2
+    assert positions == [0, 4]
+
+def test_motif_search_case_insensitive():
+    dna = "atcgatcg"
+    motif = "ATC"
+    positions, count = motif_search(dna, motif)
+    
+    assert count == 2
+    assert positions == [0, 4]
+
+def test_motif_search_missing():
+    dna = "ATCG"
+    motif = "GGG"
+    positions, count = motif_search(dna, motif)
+    
+    assert count == 0
+    assert positions == []
+
+def test_motif_search_empty_sequence():
+    dna = ""
+    motif = "ATC"
+    positions, count = motif_search(dna, motif)
+    
+    assert count == 0
+    assert positions == []
+
+def test_motif_search_empty_motif():
+    dna = "ATCG"
+    motif = ""
+    positions, count = motif_search(dna, motif)
+    
+    assert count == 0
+    assert positions == []

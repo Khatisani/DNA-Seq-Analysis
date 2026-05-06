@@ -52,9 +52,24 @@ def reverse_complement(sequence):
 
 #finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):
-    output = nt_search(str(sequence.upper(), motif.upper()))
-    motif_positions = [position + 1 for position in output[1:]]
-    return motif_positions
+    s_clean = str(sequence).upper().strip()
+    m_clean = str(motif).upper().strip()
+
+    if not s_clean or not m_clean or len(m_clean) > len(s_clean):
+        return [], 0
+
+    try:
+        output = nt_search(s_clean, m_clean)
+        
+        if len(output) > 1:
+            positions = output[1:]
+            count = len(positions)
+            return positions, count
+        else:
+            return [], 0
+            
+    except Exception:
+        return [], 0
 
 #validates the motif 
 def validate_motif (motif):
