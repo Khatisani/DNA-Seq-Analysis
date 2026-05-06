@@ -1,6 +1,7 @@
 import csv
 from Bio import SeqIO
-from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight
+from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy
+
 
 def main():
     input_file = "example.fasta"
@@ -23,6 +24,7 @@ def main():
         mRNA = transcribe(dna_seq_str)
         reverse_comp = reverse_complement(dna_seq_str)
         mol_weight = calc_molecular_weight (dna_seq_str, seq_type)
+        entropy = cal_entropy(dna_seq_str)
 
         if motif:
             motif_positions = motif_search(dna_seq_str, motif)
@@ -37,12 +39,13 @@ def main():
             "id": record.id,
             "length": len(dna_seq_str),
             "GC%": gc,
+            "Entropy": entropy,
+            "Mol Weight (Da)": mol_weight,
             "A%": nucleotide_percentages["A"],
             "T%": nucleotide_percentages["T"],
             "C%": nucleotide_percentages["C"],
             "G%": nucleotide_percentages["G"],
             "N%": nucleotide_percentages["N"],
-            "Mol Weight (Da)": mol_weight,
             "RNA": mRNA,
             "Rev_Comp": reverse_comp,
             "Motif_Count": motif_counts,
