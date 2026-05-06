@@ -1,3 +1,4 @@
+import math 
 from Bio.Seq import Seq
 from Bio.SeqUtils import gc_fraction, nt_search, molecular_weight
 
@@ -40,3 +41,21 @@ def calc_molecular_weight(sequence, seq_type = "DNA"):
     seq = Seq(sequence.upper())
     weight = molecular_weight(seq, seq_type = seq_type)
     return round(weight, 2)
+
+#Calculates the entropy of a sequence to measure randmness
+def cal_entropy (sequence):
+    s = sequence.upper()
+    tot_length = len(s)
+
+    if tot_length == 0:
+        return 0.0 
+    
+    entropy = 0.0
+
+    for base in "ATGC":
+        count = s.count(base)
+        if count > 0:
+            probability = count / tot_length
+            entropy -= probability * math.log2(probability)
+
+    return round(entropy, 3)
