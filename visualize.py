@@ -5,26 +5,29 @@ import seaborn as sns
 def create_visualizations(df):
     sns.set_theme(style = "whitegrid")
 
-    fig, axes = plt.subplots(1, 2, fiqsize = (14, 6))
+    fig, axes = plt.subplots(1, 2, figsize = (14, 6))
 
     sns.barplot( 
         data = df, 
         x= "id",
-        y = "gc%", 
+        y = "GC_Percent", 
         ax= axes[0],
-        palette= "viridis"
+        palette= "viridis",
+        legend = False
     )
 
     axes[0].set_title("GC Percentage per Sequence")
-    axes[0].set_xticklabels(axes[0].get_xticklabels(), rotation=45, ha="right")
     axes[0].set_ylabel("GC Content (%)")
+
+    axes[0].set_xticks(range(len(df["id"])))
+    axes[0].set_xticklabels(df["id"], rotation=45, ha="right")
 
     sns.scatterplot(
         data=df, 
         x="length", 
         y="Mol_Weight_(Da)", 
         ax=axes[1], 
-        hue="GC%", 
+        hue=df["GC_Percent"], 
         palette="magma", 
         s=100
     )
@@ -38,5 +41,5 @@ def create_visualizations(df):
     plt.savefig(plot_filename)
     print(f"\nDashboard saved as '{plot_filename}'")
     plt.close()
-    
+
 

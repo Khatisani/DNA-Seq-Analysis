@@ -72,13 +72,14 @@ def validate_motif (motif):
 #Calculates the molecular weight of a DNA sequence
 def calc_molecular_weight(sequence, seq_type = "DNA"):
     seq = Seq(sequence.upper())
-    weight = molecular_weight(seq, seq_type = seq_type)
+    clean_seq = seq.replace("N", "A")
+    weight = molecular_weight(clean_seq, seq_type = seq_type)
     return round(weight, 2)
 
 #Calculates the entropy of a sequence to measure randmness
 def cal_entropy (sequence):
-    s = sequence.upper()
-    tot_length = len(s)
+    seq = sequence.upper()
+    tot_length = len(seq)
 
     if tot_length == 0:
         return 0.0 
@@ -86,7 +87,7 @@ def cal_entropy (sequence):
     entropy = 0.0
 
     for base in "ATGC":
-        count = s.count(base)
+        count = seq.count(base)
         if count > 0:
             probability = count / tot_length
             entropy -= probability * math.log2(probability)
@@ -96,9 +97,9 @@ def cal_entropy (sequence):
 #Calculates the gc skew of a sequence. 
 def cal_gc_skew (sequence):
 
-    s = sequence.upper()
-    g_count = s.count("G")
-    c_count = s.count("C")
+    seq = sequence.upper()
+    g_count = seq.count("G")
+    c_count = seq.count("C")
 
     total_gc = g_count + c_count
 

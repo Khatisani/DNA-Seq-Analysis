@@ -54,15 +54,15 @@ def main():
 
         else:
             motif_counts = 0
-            motif_positions_str = "N\A"
+            motif_positions_str = "N/A"
 
         row = {
             "id": record.id,
             "length": len(dna_seq_str),
-            "GC%": gc,
+            "GC_Percent": gc,
             "GC_Skew": gc_skew,
             "Entropy": entropy,
-            "Mol Weight (Da)": mol_weight,
+            "Mol_Weight_(Da)": mol_weight,
             "A%": nucleotide_percentages["A"],
             "T%": nucleotide_percentages["T"],
             "C%": nucleotide_percentages["C"],
@@ -81,7 +81,7 @@ def main():
 
         df.to_csv(output_file, index = False)
         print(f"Data saved to {output_file}. Preview: ")
-        print(df[["id", "length", "GC%", "Mol_Weight_(Da)"]].head())
+        print(df[["id", "length", "GC_Percent", "Mol_Weight_(Da)"]].head())
 
         create_visualizations(df)
     else:
