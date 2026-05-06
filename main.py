@@ -1,7 +1,10 @@
 import csv
 from Bio import SeqIO
 from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence, validate_motif
-
+from visualize import create_visualizations
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def main():
     input_file = "example.fasta"
@@ -14,7 +17,12 @@ def main():
         print("Error: {input_file} not found")
         return
     
+    if not dna_seqs:
+        print("Error: No sequences found")
+        return
+    
     motif = input("Enter motif to search (press Enter to skip): ").strip()
+
     motif_valid = True
     if motif:
         is_valid, error_message = validate_motif(motif)
@@ -24,7 +32,7 @@ def main():
             motif = " "
 
     for record in dna_seqs:
-        dna_seq_str = str(record.sequence)
+        dna_seq_str = str(record.seq)
 
         is_valid, error_message = validate_sequence(dna_seq_str)
         if not is_valid:
@@ -39,14 +47,14 @@ def main():
         entropy = cal_entropy(dna_seq_str)
         gc_skew = cal_gc_skew(dna_seq_str)
 
-        if motif:
+        if motif and motif_valid:
             motif_positions = motif_search(dna_seq_str, motif)
             motif_counts = len(motif_positions)
             motif_positions_str = " ".join(map(str, motif_positions)) if motif_positions else "None"
 
         else:
             motif_counts = 0
-            motif_positions_str = "None"
+            motif_positions_str = "N\A"
 
         row = {
             "id": record.id,
@@ -68,18 +76,16 @@ def main():
 
         output.append(row)
 
-    if not output:
-        print("No output to write.")
-        return
+    if output:
+        df = pd.DataFrame(output)
 
-    keys = output[0].keys()
+        df.to_csv(output_file, index = False)
+        print(f"Data saved to {output_file}. Preview: ")
+        print(df[["id", "length", "GC%", "Mol_Weight_(Da)"]].head())
 
-    with open(output_file, "w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=keys)
-        writer.writeheader()
-        writer.writerows(output)
-    print(f"Success! Analyzed {len(output)} sequences. See {output_file}.")
-
+        create_visualizations(df)
+    else:
+        print("No valid sequences were processed.")
 
 if __name__ == "__main__":
     main()
