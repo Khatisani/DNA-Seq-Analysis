@@ -52,6 +52,22 @@ def motif_search(sequence,  motif):
     motif_positions = [position + 1 for position in output[1:]]
     return motif_positions
 
+#validates the motif 
+def validate_motif (motif):
+    m = motif.upper().strip()
+
+    if len(m) == 0:
+        return False, "Motif is empty"
+    
+    valid_bases = set("ATGCN")
+    motif_set = set(m)
+
+    invalid = motif_set - valid_bases
+
+    if invalid:
+        return False, f"Contains invalid characters: {', '.join(invalid)}"
+    return True, "Valid motif."
+
 
 #Calculates the molecular weight of a DNA sequence
 def calc_molecular_weight(sequence, seq_type = "DNA"):
