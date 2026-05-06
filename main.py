@@ -1,6 +1,6 @@
 import csv
 from Bio import SeqIO
-from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search
+from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight
 
 def main():
     input_file = "example.fasta"
@@ -22,6 +22,7 @@ def main():
         gc = gc_content(dna_seq_str)
         mRNA = transcribe(dna_seq_str)
         reverse_comp = reverse_complement(dna_seq_str)
+        mol_weight = calc_molecular_weight (dna_seq_str, seq_type)
 
         if motif:
             motif_positions = motif_search(dna_seq_str, motif)
@@ -41,6 +42,7 @@ def main():
             "C%": nucleotide_percentages["C"],
             "G%": nucleotide_percentages["G"],
             "N%": nucleotide_percentages["N"],
+            "Mol Weight": mol_weight,
             "RNA": mRNA,
             "Rev_Comp": reverse_comp,
             "Motif_Count": motif_counts,
