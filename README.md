@@ -1,25 +1,32 @@
 # DNA Sequence Analysis
 
-Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse complement sequences, and optionally search for DNA motifs.
+Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse complement sequences, and optionally search for DNA motifs. 
 
----
+--- 
 
 ## **Features**
 
-- Parse **multi-line FASTA files**
-- Calculate **base percentage (A, T, C, G)** and **GC content (%)**
-- Generate **RNA transcription** and **reverse complement**
-- Optional **DNA motif search** with positions and counts
-- Export results to **CSV file** for easy viewing
+- **File Processing & Validation**: Parses FASTA files and validates both sequence integrity and search motifs.
 
+- **Nucleotide Analysis**: Calculates sequence length, nucleotide percentages (A, T, C, G, N), and GC content.
+
+- **Genomic Signatures**: Calculates GC Skew for locating leading/lagging replication strands.
+
+- **Biochemical Properties**: Computes sequence molecular weight (in Daltons) and Shannon sequence entropy.
+
+- **Sequence Manipulation**: Transcribes DNA → RNA and generates reverse complements.
+
+- **Motif Searching**: Locates specific nucleotide patterns within the sequence.
+
+- **Data Integration & Dashboard**: Exports analysis metrics to a Pandas DataFrame/CSV and saves a visualization dashboard.
 ---
 
-## **Requirements & Installation **
+## ** Requirements & Installation **
 
 - Install Dependencies 
-`pip install biopython` 
+`pip install biopython pandas matplotlib seaborn` 
 
-## **Next Steps **
+## ** Next Steps **
 - ✔ Manual data handling
 - ✔ Biopython Integration 
 
@@ -28,7 +35,7 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 - ✔ GC skew
 
 - ✔ Error Handling and Validation
-- Pandas and Matplotlib
+- ✔ Pandas and Matplotlib
 - BLAST Integration
 - Translation (start stop codon, ORF)
 
