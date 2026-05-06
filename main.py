@@ -1,6 +1,6 @@
 import csv
 from Bio import SeqIO
-from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew
+from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence
 
 
 def main():
@@ -18,6 +18,11 @@ def main():
     
     for record in dna_seqs:
         dna_seq_str = str(record.sequence)
+
+        is_valid, error_message = validate_sequence(dna_seq_str)
+        if not is_valid:
+            print(f"Skipping sequence '{record.id}': {error_message}")
+            continue
 
         nucleotide_counts, nucleotide_percentages = count_nucleotides(dna_seq_str) 
         gc = gc_content(dna_seq_str)
