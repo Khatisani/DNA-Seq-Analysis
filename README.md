@@ -23,7 +23,7 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 - ✔ Manual data handling
 - ✔ Biopython Integration 
 
-- Molecular Weight 
+- ✔ Molecular Weight 
 - Sequence Entropy
 - GC skew
 
