@@ -7,7 +7,7 @@ def validate_sequence(sequence):
     s = sequence.upper().strip()
 
     if len(s) == 0:
-        return False, "Sequence is empty"
+        return False, "Sequence is empty."
     
     valid_bases = set("ATGCN")
     sequence_set = set(s)
