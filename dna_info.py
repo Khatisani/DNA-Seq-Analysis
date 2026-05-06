@@ -30,7 +30,13 @@ def reverse_complement(sequence):
 
 #finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):
-    output = nt_search(str(sequence.upper(), motif.upper())
+    output = nt_search(str(sequence.upper(), motif.upper()))
     motif_positions = [position + 1 for position in output[1:]]
     return motif_positions
 
+
+#Calculates the molecular weight of a DNA sequence
+def calc_molecular_weight(sequence, type = "DNA"):
+    seq = Seq(sequence.upper())
+    weight = molecular_weight(seq, type = type)
+    return round(weight, 2)
