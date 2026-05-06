@@ -1,5 +1,5 @@
 from Bio.Seq import Seq
-from Bio.SeqUtils import gc_fraction, nt_search
+from Bio.SeqUtils import gc_fraction, nt_search, molecular_weight
 
 #counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
