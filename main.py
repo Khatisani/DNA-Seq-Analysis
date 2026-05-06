@@ -23,7 +23,7 @@ def main():
         gc = gc_content(dna_seq_str)
         mRNA = transcribe(dna_seq_str)
         reverse_comp = reverse_complement(dna_seq_str)
-        mol_weight = calc_molecular_weight (dna_seq_str, seq_type)
+        mol_weight = calc_molecular_weight (dna_seq_str, seq_type = "DNA")
         entropy = cal_entropy(dna_seq_str)
 
         if motif:
