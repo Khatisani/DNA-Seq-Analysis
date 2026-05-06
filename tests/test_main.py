@@ -54,3 +54,33 @@ def test_gc_content_case_insensitivity():
     seq = "atcg"
     gc = gc_content(seq)
     assert gc == 50.0
+
+def test_transcribe_standard():
+    dna = "ATCG"
+    rna = transcribe(dna)
+    assert rna == "AUCG"
+
+def test_transcribe_lowercase():
+    dna = "atcg"
+    rna = transcribe(dna)
+    assert rna == "AUCG"
+
+def test_transcribe_empty():
+    dna = ""
+    rna = transcribe(dna)
+    assert rna == ""
+
+def test_reverse_complement_standard():
+    dna = "ATCG"
+    rev_comp = reverse_complement(dna)
+    assert rev_comp == "CGAT"
+
+def test_reverse_complement_with_n():
+    dna = "ATN"
+    rev_comp = reverse_complement(dna)
+    assert rev_comp == "NAT"
+
+def test_reverse_complement_empty():
+    dna = ""
+    rev_comp = reverse_complement(dna)
+    assert rev_comp == ""
