@@ -5,6 +5,7 @@ from visualize import create_visualizations
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from blast_integration import run_blast
 
 def main():
     input_file = "example.fasta"
@@ -55,6 +56,17 @@ def main():
         else:
             motif_counts = 0
             motif_positions_str = "N/A"
+
+        run_search = input(f"Do you want to run a BLAST search for sequence {record.id}? (y/n): ").strip().lower()
+        if run_search == 'y':
+            matches = run_blast(dna_seq_str)
+            if matches:
+                print(f"\nTop matches for {record.id}:")
+                for i, match in enumerate(matches, 1):
+                    print(f"{i}. {match['title']} (E-value: {match['e_value']})")
+            else:
+                print("No matches found or connection failed.")
+
 
         row = {
             "id": record.id,
