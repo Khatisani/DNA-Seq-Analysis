@@ -5,11 +5,18 @@ from src.visualize import create_visualizations
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 from blast_integration import run_blast
 
 def main():
-    input_file = "example.fasta"
-    output_file = "results.csv"
+    """
+    Main execution pipeline for batch processing FASTA sequences, validating data,
+    performing genomic and biochemical calculations, optional BLAST alignment, 
+    and exporting CSV reports and summary dashboards.
+    """
+    input_file = "data/example.fasta"
+    os.makedirs("outputs", exist_ok=True)
+    output_file = "outputs/results.csv"
     output = []
 
     try:
