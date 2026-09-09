@@ -42,23 +42,23 @@ DNA-Seq-Analysis/
 └── requirements.txt
 ```
 
-## ** Requirements & Installation **
+## **Requirements & Installation**
 
 Install Dependencies 
 `pip install -r requirements.txt` 
 
-## ** Running the Web App ** 
+## **Running the Web App** 
 
 Launch the interactive Streamlit dashboard locally:
 
 `streamlit run app.py`
 
-## ** Run the CLI Pipeline ** 
+## **Run the CLI Pipeline**
 Execute the batch processing script from the root directory:
 
 `python src/main.py`
 
-## ** Next Steps **
+## **Next Steps**
 
 - Translation (start stop codon, ORF)
 
