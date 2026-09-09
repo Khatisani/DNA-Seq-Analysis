@@ -2,8 +2,18 @@ import math
 from Bio.Seq import Seq
 from Bio.SeqUtils import gc_fraction, nt_search, molecular_weight
 
-#Validates the sequence
 def validate_sequence(sequence):
+    """
+    Validates a DNA sequence string to ensure it is not empty and 
+    contains only valid nucleotide characters (A, T, G, C, N).
+
+    Args:
+        sequence (str): The raw DNA sequence string.
+
+    Returns:
+        tuple: (bool, str) indicating whether the sequence is valid and a descriptive message.
+    """
+
     s = sequence.upper().strip()
 
     if len(s) == 0:
@@ -19,8 +29,18 @@ def validate_sequence(sequence):
     return True, "Valid sequence."
 
 
-#counts the number and percentage of A, T, G, C nucleotides
 def count_nucleotides(sequence):
+    """
+    Counts the absolute number and percentage of each nucleotide (A, T, G, C, N) 
+    in a given DNA sequence.
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        tuple: Two dictionaries containing the absolute counts and percentage breakdown respectively.
+    """
+
     seq = Seq(sequence.upper().strip())
     length = len(seq)
 
@@ -34,24 +54,60 @@ def count_nucleotides(sequence):
     return nucleotide_counts, nucleotide_percentage
 
 
-#gc content is calculated taking into the account ambiguous bases like "N"
 def gc_content(sequence):
+    """
+    Calculates the GC content percentage of a DNA sequence, 
+    accounting for ambiguous bases like 'N'.
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        float: The GC percentage rounded to 2 decimal places.
+    """
     gc_percentage = gc_fraction(sequence.upper()) *100
     return round(gc_percentage, 2)
 
 
-#generates the RNA transcript of the DNA sequence
 def transcribe(sequence):
+    """
+    Generates the messenger RNA (mRNA) transcript of a DNA sequence 
+    by replacing thymine (T) with uracil (U).
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        str: The transcribed RNA sequence string.
+    """
     return str(Seq(sequence.upper()).transcribe())
 
 
-#generates the reverse complement of the sequence
 def reverse_complement(sequence):
+    """
+    Generates the reverse complement of a DNA sequence.
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        str: The reverse complement DNA sequence string.
+    """
     return str(Seq(sequence.upper()).reverse_complement())
 
 
-#finds the position of the motif in a DNA sequence
 def motif_search(sequence,  motif):
+    """
+    Searches for the starting positions of a given motif within a DNA sequence.
+
+    Args:
+        sequence (str): The target DNA sequence string.
+        motif (str): The nucleotide pattern/motif to search for.
+
+    Returns:
+        tuple: A list of integer start positions and the total match count.
+    """
+
     s_clean = str(sequence).upper().strip()
     m_clean = str(motif).upper().strip()
 
@@ -71,8 +127,19 @@ def motif_search(sequence,  motif):
     except Exception:
         return [], 0
 
-#validates the motif 
+    
 def validate_motif (motif):
+    """
+    Validates a search motif string to ensure it is not empty and 
+    contains only valid nucleotide characters.
+
+    Args:
+        motif (str): The motif string to validate.
+
+    Returns:
+        tuple: (bool, str) indicating whether the motif is valid and a descriptive message.
+    """
+    
     m = motif.upper().strip()
 
     if len(m) == 0:
@@ -88,8 +155,18 @@ def validate_motif (motif):
     return True, "Valid motif."
 
 
-#Calculates the molecular weight of a DNA sequence
 def calc_molecular_weight(sequence, seq_type = "DNA"):
+    """
+    Calculates the molecular weight of a nucleic acid sequence in Daltons (Da).
+
+    Args:
+        sequence (str): The nucleotide sequence string.
+        seq_type (str): The type of sequence (default is "DNA").
+
+    Returns:
+        float: The molecular weight rounded to 2 decimal places.
+    """
+
     seq = Seq(sequence).upper().strip()
 
     if not seq:
@@ -99,8 +176,18 @@ def calc_molecular_weight(sequence, seq_type = "DNA"):
     weight = molecular_weight(clean_seq, seq_type = seq_type)
     return round(weight, 2)
 
-#Calculates the entropy of a sequence to measure randmness
 def cal_entropy (sequence):
+    """
+    Calculates the Shannon sequence entropy to measure the randomness 
+    and complexity of nucleotide distribution.
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        float: The entropy value rounded to 3 decimal places.
+    """
+
     seq = sequence.upper()
     tot_length = len(seq)
 
@@ -117,8 +204,18 @@ def cal_entropy (sequence):
 
     return round(entropy, 3)
 
-#Calculates the gc skew of a sequence. 
+
 def cal_gc_skew (sequence):
+    """
+    Calculates the GC skew ((G - C) / (G + C)) of a sequence, 
+    useful for locating leading and lagging replication strands.
+
+    Args:
+        sequence (str): The DNA sequence string.
+
+    Returns:
+        float: The GC skew value rounded to 4 decimal places.
+    """
 
     seq = sequence.upper()
     g_count = seq.count("G")
