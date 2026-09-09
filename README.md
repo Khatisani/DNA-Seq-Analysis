@@ -51,7 +51,7 @@ Install Dependencies
 
 Launch the interactive Streamlit dashboard locally:
 
-`streamlit run app.py`
+`streamlit run src/app.py`
 
 ## **Run the CLI Pipeline**
 Execute the batch processing script from the root directory:
