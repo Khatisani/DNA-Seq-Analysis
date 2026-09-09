@@ -22,6 +22,26 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 
 ---
 
+## **Project Structure**
+
+```text
+DNA-Seq-Analysis/
+├── data/
+│   └── example.fasta
+├── outputs/
+│   ├── results.csv
+│   └── sequence_analysis_dashboard.png
+├── src/
+│   ├── app.py
+│   ├── blast_integration.py
+│   ├── dna_info.py
+│   ├── main.py
+│   └── visualize.py
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
 ## ** Requirements & Installation **
 
 Install Dependencies 
@@ -30,7 +50,13 @@ Install Dependencies
 ## ** Running the Web App ** 
 
 Launch the interactive Streamlit dashboard locally:
+
 `streamlit run app.py`
+
+## ** Run the CLI Pipeline ** 
+Execute the batch processing script from the root directory:
+
+`python src/main.py`
 
 ## ** Next Steps **
 
