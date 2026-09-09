@@ -1,8 +1,20 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os 
 
-#generates and saves a matplotlib/seaborn visualization from the DataFrame
+
 def create_visualizations(df):
+    """
+    Generates, formats, and saves a summary visualization dashboard 
+    containing GC percentage bar plots and length vs. molecular weight scatter plots.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing processed sequence statistics.
+
+    Returns:
+        None
+    """
+    
     sns.set_theme(style = "whitegrid")
 
     fig, axes = plt.subplots(1, 2, figsize = (14, 6))
