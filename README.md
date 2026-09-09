@@ -18,30 +18,24 @@ Parse FASTA files, calculate DNA statistics, transcribe to RNA, reverse compleme
 
 - **Motif Searching**: Locates specific nucleotide patterns within the sequence.
 
-- **Data Integration & Dashboard**: Exports analysis metrics to a Pandas DataFrame/CSV and saves a visualization dashboard.
+- **Data Integration & Dashboard**: Exports analysis metrics to CSV, provides interactive visualizations, and runs live via Streamlit.
+
 ---
 
 ## ** Requirements & Installation **
 
-- Install Dependencies 
-`pip install biopython pandas matplotlib seaborn` 
+Install Dependencies 
+`pip install -r requirements.txt` 
+
+## ** Running the Web App ** 
+
+Launch the interactive Streamlit dashboard locally:
+`streamlit run app.py`
 
 ## ** Next Steps **
-- ✔ Manual data handling
-- ✔ Biopython Integration 
 
-- ✔ Molecular Weight 
-- ✔ Sequence Entropy
-- ✔ GC skew
-
-- ✔ Error Handling and Validation
-- ✔ Pandas and Matplotlib
-- BLAST Integration
 - Translation (start stop codon, ORF)
 
-- Argument Parsing 
-- File upload (Tkinter)
-- Web App (Streamlit)
 
 
 
