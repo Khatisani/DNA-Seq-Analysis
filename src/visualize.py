@@ -14,7 +14,7 @@ def create_visualizations(df):
     Returns:
         None
     """
-    
+
     sns.set_theme(style = "whitegrid")
 
     fig, axes = plt.subplots(1, 2, figsize = (14, 6))
@@ -49,7 +49,8 @@ def create_visualizations(df):
     axes[1].set_ylabel("Molecular Weight (Da)")
     
     plt.tight_layout()
-    plot_filename = "sequence_analysis_dashboard.png"
+    os.makedirs("outputs", exist_ok=True)
+    plot_filename = "outputs/sequence_analysis_dashboard.png"
     plt.savefig(plot_filename)
     print(f"\nDashboard saved as '{plot_filename}'")
     plt.close()
