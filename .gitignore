@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Testing & Caches
+.pytest_cache/
+
+# IDE
+.vscode/
+
+# Generated Outputs & Dashboards
+results.csv
+sequence_analysis_dashboard.png
