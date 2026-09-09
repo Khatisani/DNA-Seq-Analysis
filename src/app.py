@@ -6,7 +6,9 @@ from Bio.Seq import Seq
 import io
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
+# Import custom modules from the src package
 from src.dna_info import (
     validate_sequence, count_nucleotides, gc_content, 
     transcribe, reverse_complement, motif_search, 
@@ -14,7 +16,7 @@ from src.dna_info import (
 )
 from blast_integration import run_blast
 
-
+# --- Page Configuration ---
 st.set_page_config(
     page_title="DNA Sequence Analysis Dashboard",
     page_icon="🧬",
@@ -24,7 +26,7 @@ st.set_page_config(
 st.title("DNA Sequence Analysis Dashboard")
 st.markdown("Upload multiple FASTA files, paste multi-sequence FASTA text, or analyze sequences interactively.")
 
-
+# --- Sidebar Controls ---
 st.sidebar.header("Configuration & Input")
 
 upload_option = st.sidebar.radio("Choose Input Method", ["Upload FASTA File", "Manual Sequence Input"])
@@ -53,6 +55,7 @@ else:
         except Exception as e:
             st.sidebar.error(f"Error parsing FASTA text: {e}")
 
+# Motif search input
 
 motif_input = st.sidebar.text_input("Search Motif (Optional)", value="").strip()
 motif_valid = True
@@ -64,10 +67,10 @@ if motif_input:
     else:
         st.sidebar.success("Motif is valid.")
 
-
+# Run Analysis Button
 run_button = st.sidebar.button("Run Analysis", type="primary")
 
-
+# --- Main Logic ---
 if run_button:
     if not records_to_process:
         st.warning("Please upload valid FASTA file(s) or provide valid FASTA text.")
@@ -121,10 +124,15 @@ if run_button:
         
         if output_data:
             df = pd.DataFrame(output_data)
+            os.makedirs("outputs", exist_ok=True)
+            output_csv_path = "outputs/results.csv"
+            df.to_csv(output_csv_path, index=False)
+
             st.session_state["df"] = df
             st.session_state["records_to_process"] = records_to_process
             st.success(f"Successfully processed {len(output_data)} sequence(s)!")
 
+# --- Display Results if Available in Session State ---
 
 if "df" in st.session_state:
     df = st.session_state["df"]
@@ -132,7 +140,9 @@ if "df" in st.session_state:
     
     st.subheader("Summary Metrics Table")
     st.dataframe(df.drop(columns=["RNA", "Rev_Comp"]), use_container_width=True)
-    
+
+    # Download CSV button
+
     csv = df.to_csv(index=False).encode('utf-8')
     st.download_button(
         label="Download Results as CSV",
@@ -140,7 +150,9 @@ if "df" in st.session_state:
         file_name="sequence_analysis_results.csv",
         mime="text/csv",
     )
-    
+
+    # --- Visualizations Section ---
+
     st.subheader("Visualizations")
     col1, col2 = st.columns(2)
     
@@ -166,7 +178,7 @@ if "df" in st.session_state:
         st.pyplot(fig2)
         plt.close(fig2)
 
-
+# --- Individual Sequence Explorer ---
     st.markdown("---")
     st.subheader("Deep Dive Explorer")
     selected_id = st.selectbox("Select sequence for detailed sequence inspection:", df["id"].tolist())
@@ -186,6 +198,8 @@ if "df" in st.session_state:
             
         if motif_input:
             st.info(f"**Motif Search Results for '{motif_input}'**: Found {seq_row['Motif_Count']} time(s) at position(s): {seq_row['Motif_Positions']}")
+
+# Optional BLAST Integration
 
         if st.button(f"Run Online NCBI BLAST for {selected_id}"):
             with st.spinner("Connecting to NCBI BLAST server (this may take a minute)..."):
