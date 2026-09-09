@@ -1,7 +1,7 @@
 import csv
 from Bio import SeqIO
-from dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence, validate_motif
-from visualize import create_visualizations
+from src.dna_info import count_nucleotides, gc_content, transcribe, reverse_complement, motif_search, calc_molecular_weight, cal_entropy, cal_gc_skew, validate_sequence, validate_motif
+from src.visualize import create_visualizations
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns

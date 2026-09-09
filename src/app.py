@@ -7,7 +7,7 @@ import io
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from dna_info import (
+from src.dna_info import (
     validate_sequence, count_nucleotides, gc_content, 
     transcribe, reverse_complement, motif_search, 
     calc_molecular_weight, cal_entropy, cal_gc_skew, validate_motif
